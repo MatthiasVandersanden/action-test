@@ -1,0 +1,15 @@
+on: [push]
+jobs:
+  build:
+    name: Tagging the latest commit
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checking out repository
+      uses: actions/checkout@v2
+    - name: Tagging commit
+      id: tag
+      uses: MatthiasVandersanden/vectorworks-tag@v0.1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Output result
+      run: echo "The new tag is ${{ steps.tag.output.new_tag }}"
