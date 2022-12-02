@@ -7,10 +7,7 @@ jobs:
     - name: Checking out repository
       uses: actions/checkout@v3
     - name: Tagging commit
-      id: tag
       uses: MatthiasVandersanden/vectorworks-tag@v1.0
       with:
         token: ${{ github.token }}
         path: "${{ github.workspace }}/config.json"
-    - name: Output result
-      run: echo "The new tag is ${{ steps.tag.output.tag }}"
