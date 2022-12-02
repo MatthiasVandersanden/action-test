@@ -10,7 +10,7 @@ jobs:
       id: tag
       uses: MatthiasVandersanden/vectorworks-tag@v0.11
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ github.token }}
         path: "${{ github.workspace }}/config.json"
     - name: Output result
       run: echo "The new tag is ${{ steps.tag.output.tag }}"
