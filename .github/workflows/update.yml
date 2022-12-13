@@ -8,7 +8,11 @@ jobs:
     - name: Checking out repository
       uses: actions/checkout@v3
     - name: Updating service pack
-      uses: MatthiasVandersanden/service-pack-update@v1.0
+      uses: MatthiasVandersanden/service-pack-update@main
       with:
         token: ${{ github.token }}
         path: "${{ github.workspace }}/config.json"
+    - name: Commit and push changes to remote
+      uses: actions-js/push@master
+      with:
+        token: ${{ github.token }}
