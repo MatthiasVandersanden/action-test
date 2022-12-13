@@ -15,5 +15,5 @@ jobs:
     - name: Commit and push changes to remote
       uses: actions-js/push@master
       with:
-        github-token: ${{ github.token }}
+        github_token: ${{ github.token }}
         message: "Updating config"
