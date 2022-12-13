@@ -9,27 +9,22 @@ jobs:
     - name: Dump GitHub context
       id: github_context_step
       run: echo '${{ toJSON(github) }}'
-    - name: Dump github event
-      id: a
-      run: echo '${{ github.event.action }}'
-    - name: Dump job context
-      run: echo '${{ toJSON(job) }}'
-    - name: Dump steps context
-      run: echo '${{ toJSON(steps) }}'
-    - name: Dump runner context
-      run: echo '${{ toJSON(runner) }}'
-    - name: Dump strategy context
-      run: echo '${{ toJSON(strategy) }}'
-    - name: Dump matrix context
-      run: echo '${{ toJSON(matrix) }}'
     - name: Checking out repository
       uses: actions/checkout@v3
+    - name: Tagging commit
+      if: github.event_name == "push"
+      uses: MatthiasVandersanden/vectorworks-tag@v1.0
+      with:
+        token: ${{ github.token }}
+        path: "${{ github.workspace }}/config.json"
     - name: Updating service pack
+      if: github.event_name == "create"
       uses: MatthiasVandersanden/service-pack-update@main
       with:
         token: ${{ github.token }}
         path: "${{ github.workspace }}/config.json"
     - name: Commit and push changes to remote
+      if: github.event_name == "create"
       uses: actions-js/push@master
       with:
         github_token: ${{ github.token }}
