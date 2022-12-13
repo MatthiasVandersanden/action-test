@@ -12,19 +12,19 @@ jobs:
     - name: Checking out repository
       uses: actions/checkout@v3
     - name: Tagging commit
-      if: github.event_name == "push"
+      if: github.event_name == 'push'
       uses: MatthiasVandersanden/vectorworks-tag@v1.0
       with:
         token: ${{ github.token }}
         path: "${{ github.workspace }}/config.json"
     - name: Updating service pack
-      if: github.event_name == "create"
+      if: github.event_name == 'create'
       uses: MatthiasVandersanden/service-pack-update@main
       with:
         token: ${{ github.token }}
         path: "${{ github.workspace }}/config.json"
     - name: Commit and push changes to remote
-      if: github.event_name == "create"
+      if: github.event_name == 'create'
       uses: actions-js/push@master
       with:
         github_token: ${{ github.token }}
