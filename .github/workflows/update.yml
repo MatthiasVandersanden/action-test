@@ -1,10 +1,27 @@
 on:
-  create
+  push:
+  create:
 jobs:
   update:
     name: Updating the service pack
     runs-on: ubuntu-latest
     steps:
+    - name: Dump GitHub context
+      id: github_context_step
+      run: echo '${{ toJSON(github) }}'
+    - name: Dump github event
+      id: a
+      run: echo '${{ github.event.action }}'
+    - name: Dump job context
+      run: echo '${{ toJSON(job) }}'
+    - name: Dump steps context
+      run: echo '${{ toJSON(steps) }}'
+    - name: Dump runner context
+      run: echo '${{ toJSON(runner) }}'
+    - name: Dump strategy context
+      run: echo '${{ toJSON(strategy) }}'
+    - name: Dump matrix context
+      run: echo '${{ toJSON(matrix) }}'
     - name: Checking out repository
       uses: actions/checkout@v3
     - name: Updating service pack
