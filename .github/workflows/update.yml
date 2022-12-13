@@ -1,6 +1,6 @@
 on:
-  push:
   create:
+  push:
 jobs:
   update:
     name: Updating the service pack
@@ -18,14 +18,16 @@ jobs:
         token: ${{ github.token }}
         path: "${{ github.workspace }}/config.json"
     - name: Updating service pack
-      if: github.event_name == 'create'
+      if: github.event_name == 'create' && startsWith(github.ref, 'refs/heads/')
+      id: update
       uses: MatthiasVandersanden/service-pack-update@main
       with:
         token: ${{ github.token }}
         path: "${{ github.workspace }}/config.json"
     - name: Commit and push changes to remote
-      if: github.event_name == 'create'
+      if: github.event_name == 'create' && startsWith(github.ref, 'refs/heads/') && steps.update.updated == true
       uses: actions-js/push@master
       with:
         github_token: ${{ github.token }}
         message: "Updating config"
+        branch: ${{ github.ref }}
