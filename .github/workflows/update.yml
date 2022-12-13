@@ -8,7 +8,7 @@ jobs:
     steps:
     - name: Checking out repository
       uses: actions/checkout@v3
-    - name Updating service pack
+    - name: Updating service pack
       uses: MatthiasVandersanden/service-pack-update@v1.0
       with:
         token: ${{ github.token }}
