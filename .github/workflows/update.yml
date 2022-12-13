@@ -24,6 +24,12 @@ jobs:
       with:
         token: ${{ github.token }}
         path: "${{ github.workspace }}/config.json"
+    - name: Dump
+      run: |
+        echo '${{steps.update.outcome}}'
+        echo '${{steps.update.outcome == 'success'}}'
+        echo '${{steps.update.outputs.updated}}'
+        echo '${{steps.update.outputs.updated == true}}'
     - name: Commit and push changes to remote
       if: steps.update.outcome == 'success' && steps.update.outputs.updated == true
       uses: actions-js/push@master
