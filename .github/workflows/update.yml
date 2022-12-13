@@ -1,0 +1,15 @@
+on:
+  branch_protection_rule:
+    types: [created]
+jobs:
+  update:
+    name: Updating the service pack
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checking out repository
+      uses: actions/checkout@v3
+    - name Updating service pack
+      uses: MatthiasVandersanden/service-pack-update@v1.0
+      with:
+        token: ${{ github.token }}
+        path: "${{ github.workspace }}/config.json"
