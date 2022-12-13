@@ -1,6 +1,5 @@
 on:
-  branch_protection_rule:
-    types: [created]
+  create
 jobs:
   update:
     name: Updating the service pack
